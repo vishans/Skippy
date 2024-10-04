@@ -1,0 +1,32 @@
+{
+    "manifest_version": 2,
+    "name": "Skippy",
+    "version": "1.0",
+    "description": "Automatically clicks the skip intro, recap or next episode button.",
+    "permissions": [
+      "activeTab",
+      "webNavigation",
+      "storage",
+      "scripting"
+    ],
+    "content_scripts": [
+      {
+        "matches": ["*://*.netflix.com/*"],
+        "js": ["content.js"],
+        "run_at": "document_end"
+      }
+    ],
+    "browser_action": {
+        "default_popup": "popup/popup.html",
+        "default_icon": {
+          "48": "icon48.png",
+          "128": "icon128.png"
+        },
+        "default_title": "Skippy Settings"
+    },
+    "icons": {
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  }
+  
