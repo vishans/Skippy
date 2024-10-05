@@ -1,4 +1,4 @@
-console.log('popup.js is loaded'); // At the very top of popup.js
+const browserAPI = window.browser || window.chrome;
 
 console.log('here');
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const saveButton = document.getElementById('saveButton');
 
   // Load the saved settings and update the UI accordingly
-  browser.storage.sync
+  browserAPI.storage.sync
     .get(['skipRecap', 'skipIntro', 'nextEpisode'])
     .then(settings => {
       skipRecapSwitch.checked = settings.skipRecap || false;
@@ -19,14 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Save settings when the Save button is clicked
   saveButton.addEventListener('click', () => {
-    console.log('hello world');
-
+    
     const settings = {
       skipRecap: skipRecapSwitch.checked,
       skipIntro: skipIntroSwitch.checked,
       nextEpisode: nextEpisodeSwitch.checked,
     };
-    browser.storage.sync.set(settings).then(() => {
+    browserAPI.storage.sync.set(settings).then(() => {
       console.log('Settings saved');
     });
   });
