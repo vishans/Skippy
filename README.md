@@ -1,5 +1,10 @@
 # Skippy - Netflix Skip Extension
 
+<p align="center">
+  <img src="screenshot/screenshot0.png" alt="Screenshot" width="300" />
+</p>
+
+
 ## Overview
 
 **Skippy** is a lightweight browser extension that enhances your Netflix viewing experience by automatically skipping intros, recaps, and seamlessly transitioning to the next episode without waiting for Netflix’s built-in countdown. No more interruptions or the hassle of manually clicking “Skip” buttons—Skippy does it all for you!
