@@ -1,17 +1,33 @@
 function clickSkipButton() {
-  // Look for skip element
-  const skipButton =
-    document.querySelector('button[data-uia="player-skip-recap"]') ||
-    document.querySelector('button[data-uia="player-skip-intro"]') ||
-    document.querySelector('button[data-uia="next-episode-seamless-button"]') ||
-    document.querySelector(
-      'button[data-uia="next-episode-seamless-button-draining"]'
-    );
+  chrome.runtime.sendMessage({ action: 'getSharedData' }, response => {
+    console.log(response.data);
+    if (response.data) {
+      ({ skipIntro, skipRecap, nextEpisode } = response.data);
 
-  if (skipButton) {
-    // Click the "Skip Intro" button if it's found
-    skipButton.click();
-  }
+      const skipRecapBtn = document.querySelector(
+        'button[data-uia="player-skip-recap"]'
+      );
+      const skipIntroBtn = document.querySelector(
+        'button[data-uia="player-skip-intro"]'
+      );
+      const nextEpisodeBtn = document.querySelector(
+        'button[data-uia="next-episode-seamless-button"]'
+      );
+      const nextEpisodedrainBtn = document.querySelector(
+        'button[data-uia="next-episode-seamless-button-draining"]'
+      );
+
+      if (skipIntroBtn && skipIntro) {
+        skipIntroBtn.click();
+      } else if (skipRecapBtn && skipRecap) {
+        skipRecapBtn.click();
+      } else if ((nextEpisodeBtn || nextEpisodedrainBtn) && nextEpisode) {
+        (nextEpisodeBtn || nextEpisodedrainBtn).click();
+      }
+    }
+  });
+
+  
 }
 
 // MutationObserver to monitor DOM changes
