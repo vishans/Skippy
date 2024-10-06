@@ -1,5 +1,5 @@
 // Define a global variable to hold shared data
-let sharedData = { skipIntro: true, skipRecap: false, nextEpisode: true };
+let sharedData = { skipIntro: true, skipRecap: true, nextEpisode: true };
 
 // Listener for messages from content or popup scripts
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
