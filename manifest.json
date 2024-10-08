@@ -4,35 +4,30 @@
     "version": "2.0",
     "description": "Automatically clicks the skip intro, recap or next episode button.",
     "permissions": [
-      "activeTab",
-      "webNavigation",
-      "storage"
+        "activeTab",
+        "webNavigation",
+        "storage"
+    ],
+    "host_permissions": [
+        "*://*.netflix.com/*"
     ],
     "background": {
-      "service_worker": "background.js",
-      "scripts": ["background.js"]
+        "service_worker": "background.js",
+        "scripts": ["background.js"]
     },
     "content_scripts": [
-      {
-        "matches": [
-          "*://*.netflix.com/*"
-        ],
-        "js": [
-          "content.js"
-        ],
-        "run_at": "document_end"
-      }
+        {
+            "matches": [
+                "*://*.netflix.com/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "run_at": "document_end"
+        }
     ],
     "action": {
-      "default_popup": "popup/popup.html",
-      "default_icon": {
-        "48": "icon48.png",
-        "128": "icon128.png"
-      },
-      "default_title": "Skippy Settings"
-    },
-    "icons": {
-      "48": "icon48.png",
-      "128": "icon128.png"
+        "default_popup": "popup/popup.html",
+        "default_title": "Skippy Settings"
     }
-  }
+}
