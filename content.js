@@ -1,6 +1,5 @@
 function clickSkipButton() {
   chrome.runtime.sendMessage({ action: 'getSharedData' }, response => {
-    console.log(response.data);
     if (response.data) {
       ({ skipIntro, skipRecap, nextEpisode } = response.data);
 
