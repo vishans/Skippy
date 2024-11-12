@@ -1,7 +1,7 @@
 function clickSkipButton() {
   chrome.runtime.sendMessage({ action: 'getSharedData' }, response => {
     if (response.data) {
-      ({ skipIntro, skipRecap, nextEpisode } = response.data);
+      ({ skipIntro, skipRecap, nextEpisode, scrollDelta } = response.data);
 
       const skipRecapBtn = document.querySelector(
         'button[data-uia="player-skip-recap"]'
@@ -34,39 +34,37 @@ const observer = new MutationObserver(() => {
   clickSkipButton();
 });
 
-// Observe the entire document for changes
+
 observer.observe(document, { childList: true, subtree: true });
 
 // In case the button is already on screen
 clickSkipButton();
 
 document.addEventListener("wheel", (event) => {
-  console.log("Scroll detected:", event.deltaY);
-  // Check scroll direction
-  if (event.deltaY < 0) {
-      console.log("Scrolling up - simulating ArrowUp key press");
-      simulateKeyPress("ArrowUp");
-  } else if (event.deltaY > 0) {
-      console.log("Scrolling down - simulating ArrowDown key press");
-      simulateKeyPress("ArrowDown");
-  }
+  const video = document.querySelector("video");
+  
+  chrome.runtime.sendMessage({ action: 'getSharedData' }, response => {
+    if (response.data) {
+      ({ skipIntro, skipRecap, nextEpisode, scrollDelta, scrollReverse } = response.data);
+      
+      if(!scrollReverse){
+        // 0 <= video.volume <= 1
+        if ((event.deltaY < 0)) {
+          video.volume = Math.max(video.volume - scrollDelta, 0);
+        }else{
+          video.volume = Math.min(1, video.volume + scrollDelta);
+        }
+      }else{
+        if ((event.deltaY < 0)) {
+          video.volume = Math.min(1, video.volume + scrollDelta);
+        }else{
+          video.volume = Math.max(video.volume - scrollDelta, 0);
+        }
+      }
+
+    }
+  })
+
+ 
 });
 
-// Function to simulate a key press event
-function simulateKeyPress(key) {
-
-  const event = new KeyboardEvent("keydown", {
-      key: key,
-      code: key,
-      keyCode: key === "ArrowUp" ? 38 : 40, // ArrowUp = 38, ArrowDown = 40
-      which: key === "ArrowUp" ? 38 : 40,
-      bubbles: true,
-      cancelable: true,
-  });
-  
-  setTimeout(() => {
-    document.body.dispatchEvent(event);
-    console.log(`Simulated key press event for ${key} dispatched`);
-}, 10); // 10ms delay to ensure the event registers
-
-}
