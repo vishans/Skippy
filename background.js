@@ -4,7 +4,7 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.local.get(['sharedData'], (result) => {
     if (!result.sharedData) {
       chrome.storage.local.set({
-        sharedData: { skipIntro: true, skipRecap: true, nextEpisode: true }
+        sharedData: { skipIntro: true, skipRecap: true, nextEpisode: true, scrollDelta: 0.01, scrollReverse: false }
       });
     }
   });
