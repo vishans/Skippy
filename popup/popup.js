@@ -7,17 +7,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const skipRecapSwitch = document.getElementById('skipRecapSwitch');
   const skipIntroSwitch = document.getElementById('skipIntroSwitch');
   const nextEpisodeSwitch = document.getElementById('nextEpisodeSwitch');
+  const scrollDeltaInput = document.getElementById('scrollDelta');
+  const scrollDirection = document.getElementById("scrollDirectionReverse");
   const saveButton = document.getElementById('saveButton');
 
   // Load the saved settings and update the UI accordingly
   chrome.runtime.sendMessage({ action: 'getSharedData' }, response => {
     console.log(response.data);
     if (response.data) {
-      ({ skipIntro, skipRecap, nextEpisode } = response.data);
+      ({ skipIntro, skipRecap, nextEpisode, scrollDelta, scrollReverse } = response.data);
 
       skipRecapSwitch.checked = skipRecap;
       skipIntroSwitch.checked = skipIntro;
       nextEpisodeSwitch.checked = nextEpisode;
+      scrollDeltaInput.value = scrollDelta * 100;
+      scrollDirection.checked = scrollReverse;
     }
   });
 
@@ -27,6 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
       skipRecap: skipRecapSwitch.checked,
       skipIntro: skipIntroSwitch.checked,
       nextEpisode: nextEpisodeSwitch.checked,
+      scrollDelta: scrollDeltaInput.value / 100,
+      scrollReverse: scrollDirection.checked
     };
 
     chrome.runtime.sendMessage(

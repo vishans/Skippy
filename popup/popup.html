@@ -8,7 +8,7 @@
 </head>
 <body>
   <h2>Settings</h2>
-  <h3>Netflix</h3>
+  <h3>Automatic Skip</h3>
   <div class="switch">
     <label for="skipRecapSwitch">Skip Recap</label>
     <input type="checkbox" id="skipRecapSwitch">
@@ -20,6 +20,15 @@
   <div class="switch">
     <label for="nextEpisodeSwitch">Next Episode</label>
     <input type="checkbox" id="nextEpisodeSwitch">
+  </div>
+  <h3>Scroll Volume Control</h3>
+  <div class="numberField">
+    <label for="scrollDelta">Scroll Delta:</label>
+    <input type="number" id="scrollDelta" name="scrollDelta" min="1" step="1" required>
+  </div>
+  <div class="switch">
+    <label for="scrollDirectionReverse">Reverse Scroll Direction</label>
+    <input type="checkbox" id="scrollDirectionReverse">
   </div>
   <button id="saveButton">Save</button>
 </body>
