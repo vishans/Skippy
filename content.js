@@ -62,9 +62,55 @@ document.addEventListener("wheel", (event) => {
         }
       }
 
+      showVolumeOverlay(video.volume);
+
     }
   })
 
  
 });
 
+
+function showVolumeOverlay(volume) {
+  let overlay = document.querySelector(".volume-overlay");
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.className = "volume-overlay";
+    document.body.appendChild(overlay);
+  }
+  
+  overlay.innerText = `Volume: ${(volume * 100).toFixed(0)}%`;
+  overlay.style.opacity = "1";
+  
+  // Hide overlay after a short delay
+  clearTimeout(window.volumeOverlayTimeout);
+  window.volumeOverlayTimeout = setTimeout(() => {
+    overlay.style.opacity = "0";
+  }, 1000);
+}
+
+
+// Add some basic styles for the volume overlay
+const style = document.createElement("style");
+style.innerHTML = `
+  .volume-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 8vh;
+    text-align: center;
+    width: 45vh;  /* Increase width */
+    height: 45vh; /* Increase height */
+    transition: opacity 0.5s;
+    pointer-events: none;
+  }
+`;
+document.head.appendChild(style);
