@@ -79,7 +79,7 @@ function showVolumeOverlay(volume) {
     document.body.appendChild(overlay);
   }
   
-  overlay.innerText = `Volume: ${(volume * 100).toFixed(0)}%`;
+  overlay.innerHTML = `<div>Volume</div><div>${(volume * 100).toFixed(0)}%</div>`;
   overlay.style.opacity = "1";
   
   // Hide overlay after a short delay
@@ -99,6 +99,7 @@ style.innerHTML = `
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
+    flex-direction: column; /* Stack items vertically */
     justify-content: center;
     align-items: center;
     padding: 15px;
@@ -107,10 +108,13 @@ style.innerHTML = `
     color: white;
     font-size: 8vh;
     text-align: center;
-    width: 45vh;  /* Increase width */
-    height: 45vh; /* Increase height */
+    width: 45vh;
+    height: 45vh;
     transition: opacity 0.5s;
     pointer-events: none;
+  }
+  .volume-overlay div {
+    line-height: 1; /* Control spacing between lines */
   }
 `;
 document.head.appendChild(style);
