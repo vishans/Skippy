@@ -29,6 +29,11 @@ function clickSkipButton() {
   
 }
 
+function isValidNetflixWatchURL(url) {
+  const pattern = /^https:\/\/www\.netflix\.[a-z]{2,}\/watch\/\d+(?:\?trackId=\d+)?$/;
+  return pattern.test(url);
+}
+
 // MutationObserver to monitor DOM changes
 const observer = new MutationObserver(() => {
   clickSkipButton();
@@ -41,6 +46,10 @@ observer.observe(document, { childList: true, subtree: true });
 clickSkipButton();
 
 document.addEventListener("wheel", (event) => {
+  if(!isValidNetflixWatchURL(window.location)){
+    return;
+  }
+
   const video = document.querySelector("video");
   
   chrome.runtime.sendMessage({ action: 'getSharedData' }, response => {
