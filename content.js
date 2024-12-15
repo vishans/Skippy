@@ -50,6 +50,12 @@ document.addEventListener("wheel", (event) => {
     return;
   }
 
+  if (document.querySelector('[data-uia="season-pane"]')) {
+    // Abort if season pane is on screen
+    // User might want to scroll through episodes and whatnot
+    return;
+  }
+
   const video = document.querySelector("video");
   
   chrome.runtime.sendMessage({ action: 'getSharedData' }, response => {
