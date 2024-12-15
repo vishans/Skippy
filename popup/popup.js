@@ -1,7 +1,6 @@
 const browserAPI = window.browser || window.chrome;
 var skipIntro, skipRecap, nextEpisode;
 
-console.log('here');
 document.addEventListener('DOMContentLoaded', () => {
   // Get references to the UI elements
   const skipRecapSwitch = document.getElementById('skipRecapSwitch');
@@ -23,6 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Save settings when the Save button is clicked
   saveButton.addEventListener('click', () => {
+    window.close();
+    
     const settings = {
       skipRecap: skipRecapSwitch.checked,
       skipIntro: skipIntroSwitch.checked,
