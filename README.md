@@ -20,8 +20,7 @@ With Skippy, you can customize which elements to skip:
 - **Automatic Control:** Skippy automatically detects and interacts with Netflix’s “Skip” buttons using a Mutation Observer to monitor changes in the DOM, making it more efficient compared to extensions that rely on continuous timeouts.
 - **Customizable Options:** Toggle on/off specific features from the popup menu, allowing you to control exactly what Skippy skips.
 - **Cross-Browser Compatibility:** Developed primarily for Firefox but is also compatible with other Chromium-based browsers like Chrome and Edge.
-- **Future Marketplaces Support:** Once polished, Skippy will be available in browser extension marketplaces for easy installation and updates.
-
+- **Scroll Volume Control:** Scroll up or down to control volume.
 ## Technical Details
 
 Skippy uses a **MutationObserver** to efficiently monitor the Netflix webpage for the appearance of “Skip” buttons and interact with them when necessary. Unlike other extensions that rely on set timeouts or intervals, MutationObservers react immediately to changes in the DOM, making Skippy faster and potentially more resource-efficient.
@@ -65,8 +64,4 @@ By default, all options are turned **on**:
 - **Skip Recap**
 - **Next Episode**
 
-## Future Enhancements
-
-- **Support for Other Streaming Platforms:** Expand Skippy’s functionality to support other streaming services like Amazon Prime Video and Disney+.
-- **Performance Optimization:** Optimize the current codebase for even better efficiency, ensuring smooth operation even with lower-spec devices or slow network connections.
-- **Marketplace Release:** Submit Skippy to browser extension marketplaces like Firefox Add-ons, Chrome Web Store, and Edge Add-ons for easy installation and updates.
+The volume scroll delta is initialized to `5`.
